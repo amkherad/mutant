@@ -11,12 +11,15 @@
       "es6",
       "esnext"
     ],
+    "types" : ["node"],
     "noImplicitAny": true,
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": "./",
     "paths": {
       "src/*": ["src/*"],
+      "lib/*": ["../lib/*"],
+      "@interface/*": ["../lib/interface/*"],
       "@assets/*": ["src/assets/*"],
       "@modules/*": ["src/modules/*"],
       "@data/*": ["src/data/*"],
@@ -35,6 +38,9 @@
     "isolatedModules": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "../lib/**/*",
+    "../lib/interface/**/*",
+    "../lib/mutant/**/*",
   ]
 }
