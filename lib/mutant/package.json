@@ -1,0 +1,12 @@
+{
+  "name": "mutant",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ali Mousavi Kherad <alimousavikherad@gmail.com> (http://amkherad.ir)",
+  "license": "ISC"
+}
