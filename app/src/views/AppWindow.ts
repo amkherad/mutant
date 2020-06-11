@@ -7,10 +7,17 @@ export interface WindowProps {
     width?: number;
     height?: number;
 
-    content: {url: string} | {path: string};
+    content: { url: string } | { path: string };
 
 }
 
+const isUrlContent = (obj: any): obj is { url: string } => {
+    return (typeof obj.url !== 'undefined');
+}
+
+const isFileContent = (obj: any): obj is { path: string } => {
+    return (typeof obj.path !== 'undefined');
+}
 
 export class AppWindow {
 
@@ -30,7 +37,12 @@ export class AppWindow {
 
         // and load the index.html of the app.
         //mainWindow.loadFile(path.join(__dirname, "../index.html"));
-        this.win.loadURL('http://localhost:3000/');
+        const contentObj = props.content;
+        if (isUrlContent(contentObj)) {
+            this.win.loadURL(contentObj.url);
+        } else if (isFileContent(contentObj)) {
+            this.win.loadFile(contentObj.path);
+        }
 
         // Open the DevTools.
         this.win.webContents.openDevTools();

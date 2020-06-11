@@ -2,31 +2,43 @@ import { app, BrowserWindow } from "electron";
 import { ServiceContainer } from "./services/ServiceContainer";
 import { AppWindow } from "./views/AppWindow";
 import { HttpInterface } from "./services/interface/HttpInterface";
-
+import { HttpProxy } from "./services/interface/HttpProxy";
 
 ServiceContainer.configure();
 
 
 let mainWindow: Electron.BrowserWindow | null = null;
 let httpInterface: HttpInterface | null = null;
+let httpProxy: HttpProxy | null = null;
+let port: number | null;
 
-const createWindow = () => {
+const createWindow = (port: number) => {
+
+  const windowUrl = `http://localhost:3000/?apiBaseUrl=http://localhost:${port}`;
+  // const windowUrl = `./ui/index.html/?apiBaseUrl=http://localhost:${port}`;
+  console.log(windowUrl);
 
   const mainAppWindow = new AppWindow({
-    content: { url: 'http://localhost:3000/' }
+    content: { url: windowUrl }
   });
 
   mainWindow = mainAppWindow.getWindow();
 
 }
 
-const appIsReady = () => {
-  
-  createWindow();
+const appIsReady = async () => {
 
-  httpInterface = new HttpInterface();
+  httpInterface = new HttpInterface(
+    parseInt(process.env.APP_PORT || '0')
+  );
 
-  httpInterface.listen();
+  const prt = await httpInterface.listen();
+  port = prt;
+
+  const httpProxy = new HttpProxy(httpInterface);
+
+
+  createWindow(prt);
 
 }
 
@@ -48,7 +60,7 @@ app.on("activate", () => {
   // On OS X it"s common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow();
+    createWindow(port || 3000);
   }
 });
 
