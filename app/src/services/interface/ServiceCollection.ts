@@ -50,10 +50,10 @@ export class ServiceCollection {
         console.log(`Service endpoint was called: ${req.method} ${req.url}`);
 
         const urlParts = req.url.split('/');
-        const serviceName = urlParts[1];
-        const methodName = urlParts[2];
+        const serviceName = urlParts[2];
+        const methodName = urlParts[3];
 
-        console.log(serviceName, methodName);
+        console.log(`   ---- Request to ${serviceName}.${methodName}()`);
 
         let service: ServiceDescriptor | undefined = undefined;
 
@@ -95,7 +95,7 @@ export class ServiceCollection {
 
                         httpInterface.addEndpoint(
                             ServiceCollection.handleRequest,
-                            `/${service.endpointName}/${endpiont.endpointName}`,
+                            `/api/${service.endpointName}/${endpiont.endpointName}`,
                             endpiont.method
                         );
                     }

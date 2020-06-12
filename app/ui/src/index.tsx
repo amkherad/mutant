@@ -9,7 +9,9 @@ import * as qs from 'qs';
 
 const queryParameters = qs.parse(window.location.search);
 
-ServiceContainer.configure(queryParameters['?apiBaseUrl']?.toString() || queryParameters['apiBaseUrl']?.toString() || 'http://localhost:3000');
+const apiBaseUrl = queryParameters['?apiBaseUrl']?.toString() || queryParameters['apiBaseUrl']?.toString() || 'http://localhost:3000';
+
+ServiceContainer.configure(apiBaseUrl);
 const inst = ServiceContainer.resolve<IModuleService>('IModuleService');
 
 console.log(inst.getModules());

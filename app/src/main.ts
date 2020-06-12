@@ -2,22 +2,29 @@ import { app, BrowserWindow } from "electron";
 import { ServiceContainer } from "./services/ServiceContainer";
 import { AppWindow } from "./views/AppWindow";
 import { HttpInterface } from "./services/interface/HttpInterface";
-import { HttpProxy } from "./services/interface/HttpProxy";
+import { UIResourceDriver } from "./services/interface/UIResourceDriver";
 import { ServiceCollection } from "./services/interface/ServiceCollection";
+import path from 'path';
+import { isNumber } from "util";
+
+
+const uiDirName = path.join(__dirname, 'ui');
+
 
 ServiceContainer.configure();
 
 
 let mainWindow: Electron.BrowserWindow | null = null;
 let httpInterface: HttpInterface | null = null;
-let httpProxy: HttpProxy | null = null;
+let uiResourceDriver: UIResourceDriver | null = null;
 let port: number | null;
 
-const createWindow = (port: number) => {
+const createWindow = (port: number, apiPort: number) => {
 
-  const windowUrl = `http://localhost:3000/?apiBaseUrl=http://localhost:${port}`;
+  const windowUrl = `http://localhost:${port}/?apiBaseUrl=http://localhost:${apiPort}/api`;
   // const windowUrl = `./ui/index.html/?apiBaseUrl=http://localhost:${port}`;
-  console.log(windowUrl);
+
+  console.log(`Lunching electron window for ${windowUrl}`);
 
   const mainAppWindow = new AppWindow({
     content: { url: windowUrl }
@@ -33,15 +40,19 @@ const appIsReady = async () => {
     parseInt(process.env.APP_PORT || '0')
   );
 
+  uiResourceDriver = new UIResourceDriver(uiDirName);
+  uiResourceDriver.configure(httpInterface);
+
   ServiceCollection.addEndpoints(httpInterface);
 
   const prt = await httpInterface.listen();
   port = prt;
 
-  const httpProxy = new HttpProxy(httpInterface);
+  const uiPort = !isNaN((process.env.APP_UIPORT) as any) && parseInt((process.env.APP_UIPORT) as any) !== 0
+    ? parseInt((process.env.APP_UIPORT) as any)
+    : prt;
 
-
-  createWindow(prt);
+  createWindow(uiPort, prt);
 
 }
 
@@ -63,7 +74,7 @@ app.on("activate", () => {
   // On OS X it"s common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow(port || 3000);
+    createWindow(port || 3000, port || 3000);
   }
 });
 

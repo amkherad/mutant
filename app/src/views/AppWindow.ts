@@ -28,11 +28,11 @@ export class AppWindow {
 
         // Create the browser window.
         this.win = new BrowserWindow({
-            width: props.width || 800,
+            width: props.width || 1200,
             height: props.height || 600,
-            webPreferences: {
-                preload: path.join(__dirname, "preload.js"),
-            },
+            // webPreferences: {
+            //     preload: path.join(__dirname, "preload.js"),
+            // },
         });
 
         // and load the index.html of the app.

@@ -4,6 +4,8 @@ declare global {
     namespace NodeJS {
         interface ProcessEnv {
             APP_PORT?: string;
+            APP_UIPORT: string;
+
             REACT_APP_VERSION_INFO: string;
             REACT_APP_VERSION_SOURCE: string;
             REACT_APP_VERSION_CAMPAIGN: string;

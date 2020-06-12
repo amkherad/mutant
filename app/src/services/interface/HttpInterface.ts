@@ -11,6 +11,10 @@ export class HttpInterface {
         this.exp = express();
     }
 
+    getExpress(): express.Application {
+        return this.exp;
+    }
+
     registerHandlerByMethod(method: HttpMethods, directory: string, handler: any) {
         switch (method) {
             case 'GET': {
@@ -51,10 +55,6 @@ export class HttpInterface {
     }
 
     listen(): Promise<number> {
-
-        this.exp.get('/', (req, res) => {
-            res.send('hello');
-        });
 
         return new Promise((resolve, reject) => {
             try {
