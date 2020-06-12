@@ -15,7 +15,7 @@ interface RemoteMethodProps {
 
 const remoteMethod = (instance: IService, methodName: string, props?: RemoteMethodProps) : () => Promise<any> => {
 
-    const method = props?.method || HttpMethods.GET;
+    const method = props?.method || 'POST';
     const endpointName = props?.endpointName || methodName;
 
     return async function (this: IRemoteServiceWrapper, ...args: any): Promise<any> {

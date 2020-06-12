@@ -11,9 +11,6 @@ export class ServiceContainer {
 
     static configure(baseApiUrl: string) {
 
-console.log(baseApiUrl);
-
-
         tsyringe.container.register<AppService>(AppService, {useValue: new AppService(baseApiUrl)});
         tsyringe.container.register<ModuleServiceRPC>("IModuleService", {useClass: ModuleServiceRPC});
         

@@ -1,5 +1,5 @@
-import express from 'express';
-import { IExposedServiceWrapper } from '../annotations/IExposedServiceWrapper';
+import express, { IRouterMatcher } from 'express';
+import { HttpMethods } from 'lib/interface/HttpMethods';
 
 export class HttpInterface {
 
@@ -11,17 +11,51 @@ export class HttpInterface {
         this.exp = express();
     }
 
-    bindService(constructor: {
-        new(...args: any): {}
-    }) {
-        const exposedServiceWrapper = (constructor.prototype as IExposedServiceWrapper);
+    registerHandlerByMethod(method: HttpMethods, directory: string, handler: any) {
+        switch (method) {
+            case 'GET': {
+                this.exp.get(directory, handler);
+                break;
+            }
+            case 'PATCH': {
+                this.exp.patch(directory, handler);
+                break;
+            }
+            case 'PUT': {
+                this.exp.put(directory, handler);
+                break;
+            }
+            case 'DELETE': {
+                this.exp.delete(directory, handler);
+                break;
+            }
+            case 'OPTIONS': {
+                this.exp.options(directory, handler);
+                break;
+            }
+            case 'POST':
+            default: {
+                this.exp.post(directory, handler);
+                break;
+            }
+        }
+    }
 
-        const context = exposedServiceWrapper.getExposedServiceContext();
+    addEndpoint(
+        handler: (req: express.Request, res: express.Response) => void | Promise<any>,
+        directory: string,
+        method: HttpMethods = 'POST') {
 
-        
+        this.registerHandlerByMethod(method, directory, handler as any);
+
     }
 
     listen(): Promise<number> {
+
+        this.exp.get('/', (req, res) => {
+            res.send('hello');
+        });
+
         return new Promise((resolve, reject) => {
             try {
                 const server = this.exp.listen(this.port, () => {

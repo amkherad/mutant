@@ -9,7 +9,7 @@
             "request": "attach",
             "name": "Attach to Remote",
             "address": "localhost",
-            "port": 3000,
+            "port": 5858,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "${workspaceFolder}",
             "skipFiles": [

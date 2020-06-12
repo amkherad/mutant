@@ -9,9 +9,14 @@ export class ModuleService implements IModuleService {
 
     [x: string]: (...args: any) => Promise<any>;
     
-    @ExposeMethod()
-    getModules(): Promise<string[]> {
-        throw new Error("Method not implemented.");
+    @ExposeMethod({
+        method: 'GET'
+    })
+    async getModules(): Promise<string[]> {
+        return [
+            'hello',
+            'test'
+        ];
     }
     
 }

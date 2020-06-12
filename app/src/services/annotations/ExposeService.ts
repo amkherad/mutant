@@ -20,7 +20,7 @@ export const ExposeService = (props: ExposeServiceProps): ClassDecorator => {
 
         const proto = (constructor as IExposedServiceWrapper);
 
-        proto.getExposedServiceContext = () => {
+        proto.prototype.getExposedServiceContext = () => {
             return context
         };
 

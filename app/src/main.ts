@@ -3,6 +3,7 @@ import { ServiceContainer } from "./services/ServiceContainer";
 import { AppWindow } from "./views/AppWindow";
 import { HttpInterface } from "./services/interface/HttpInterface";
 import { HttpProxy } from "./services/interface/HttpProxy";
+import { ServiceCollection } from "./services/interface/ServiceCollection";
 
 ServiceContainer.configure();
 
@@ -31,6 +32,8 @@ const appIsReady = async () => {
   httpInterface = new HttpInterface(
     parseInt(process.env.APP_PORT || '0')
   );
+
+  ServiceCollection.addEndpoints(httpInterface);
 
   const prt = await httpInterface.listen();
   port = prt;

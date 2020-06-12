@@ -1,6 +1,6 @@
 import { ServiceCollection } from "../interface/ServiceCollection"
 import { IExposedServiceWrapper } from "./IExposedServiceWrapper";
-import { HttpMethods } from "../../lib/interface/HttpMethods";
+import { HttpMethods } from "lib/interface/HttpMethods";
 
 
 export interface ExposeMethodProps {
@@ -14,7 +14,7 @@ export interface ExposeMethodProps {
 
 export const ExposeMethod = (props?: ExposeMethodProps): MethodDecorator => {
 
-    const method = props?.method || HttpMethods.GET;
+    const method = props?.method || 'POST';
 
     return (target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
 

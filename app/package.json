@@ -11,6 +11,7 @@
     "build": "npm run build-app && npm run build-ui",
     "electron-start": "npm run build-app && electron .",
     "start": "tsc && npm run build-ui && electron-start",
+    "publish": "npx electron-packager ./ mutant --all --out ../publish",
     "test": "jest"
   },
   "keywords": [],
@@ -42,7 +43,6 @@
     "babel-plugin-root-import": "^6.5.0",
     "copyfiles": "^2.3.0",
     "electron": "^9.0.3",
-    "publish": "npx electron-packager . mutant --all --out ./dist/publish",
     "electron-link": "^0.4.2",
     "electron-packager": "^14.2.1",
     "react-native-debugger": "^1.1.0",
