@@ -1,46 +1,37 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "target": "es6",
+    "target": "ES6",
     "lib": [
       "dom",
       "dom.iterable",
-      "es6",
+      "ES6",
       "esnext"
     ],
     "types" : ["node"],
     "noImplicitAny": true,
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "src/*": ["src/*"],
-      "lib/*": ["../lib/*"],
-      "@interface/*": ["../lib/interface/*"],
-      "@assets/*": ["src/assets/*"],
-      "@modules/*": ["src/modules/*"],
-      "@data/*": ["src/data/*"],
-      "@components/*": ["src/shared/components/*"],
-      "@services/*": ["src/shared/services/*"],
-      "@models/*": ["src/shared/models/*"],
-      "@state/*": ["src/shared/state/*"]
+      "src/*": ["src/*", "."],
+      "lib/*": ["../../lib/*"],
+      "interface/*": ["../../lib/interface/*"],
     },
     "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "strict": true,
     "allowJs": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
   },
   "include": [
     "src/**/*",
-    "../lib/**/*",
-    "../lib/interface/**/*",
-    "../lib/mutant/**/*",
+    // "../lib/**/*",
+    // "../lib/interface/**/*"
   ]
 }
