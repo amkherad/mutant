@@ -1,11 +1,12 @@
 import { IRemoteServiceWrapper } from "./IRemoteServiceWrapper";
 import { IService } from "lib/interface/services/IService";
+import { HttpMethods } from "lib/interface/HttpMethods";
 import { ServiceContainer } from "../ServiceContainer";
 import { AppService } from "../AppService";
 
 interface RemoteMethodProps {
 
-    method?: 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT' | 'OPTIONS';
+    method?: HttpMethods;
 
     endpointName?: string;
 
@@ -14,7 +15,7 @@ interface RemoteMethodProps {
 
 const remoteMethod = (instance: IService, methodName: string, props?: RemoteMethodProps) : () => Promise<any> => {
 
-    const method = props?.method || 'GET';
+    const method = props?.method || HttpMethods.GET;
     const endpointName = props?.endpointName || methodName;
 
     return async function (this: IRemoteServiceWrapper, ...args: any): Promise<any> {
@@ -30,7 +31,7 @@ const remoteMethod = (instance: IService, methodName: string, props?: RemoteMeth
         console.log(url);
 
         const response = await fetch(url, {
-            method,
+            method: method.toString(),
         });
 
         if (!response.ok) {

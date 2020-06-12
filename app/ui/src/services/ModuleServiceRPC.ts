@@ -13,7 +13,7 @@ export class ModuleServiceRPC implements IModuleService {
     
     @RemoteMethod()
     getModules(): Promise<string[]> {
-        return Promise.resolve([]);
+        throw new Error('Not supoprted.');
     }
 
 }

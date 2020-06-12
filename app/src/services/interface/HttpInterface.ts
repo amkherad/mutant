@@ -1,5 +1,4 @@
 import express from 'express';
-import { Server } from 'http';
 import { IExposedServiceWrapper } from '../annotations/IExposedServiceWrapper';
 
 export class HttpInterface {
