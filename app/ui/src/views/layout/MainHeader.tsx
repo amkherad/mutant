@@ -84,6 +84,7 @@ export class MainHeader extends Component {
                     overflowItems={_overflowItems}
                     overflowButtonProps={overflowProps}
                     farItems={_farItems}
+                    
                     ariaLabel="Use left and right arrow keys to navigate between commands"
                 />
             </div>

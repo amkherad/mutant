@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react";
 
 interface PipelineItemProps {
 
-
+    displayName: string;
 
 }
 
@@ -12,7 +12,7 @@ export const PipelineItem : FunctionComponent<PipelineItemProps> = (props: Pipel
 
     return (
         <div>
-            Item
+            {props.displayName}
         </div>
     );
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { PipelineModel } from "src/models/PipelineModel";
+import { PipelineItem } from "./PipelineItem";
 
 
 interface PipelineWidgetProps {
@@ -49,9 +50,9 @@ export class PipelineWidget extends Component<PipelineWidgetProps, PipelineWidge
             <div>
                 {
                     this.state.pipeline.items.map((item, index) => (
-                        <div key={'item' + index}>
-                            {item.name}
-                        </div>
+                        <PipelineItem
+                            displayName={item.name}
+                        />
                     ))
                 }
             </div>

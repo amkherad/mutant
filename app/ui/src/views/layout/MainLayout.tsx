@@ -9,15 +9,18 @@ initializeIcons();
 
 export class MainLayout extends Component {
 
+    async componentDidMount() {
 
-    render() {
+    }
+
+    render(): React.ReactElement {
         return (
             <div className="App" dir='rtl'>
                 <MainHeader>
-                    
+
                 </MainHeader>
                 <MainBody>
-                    
+
                 </MainBody>
             </div>
         );
