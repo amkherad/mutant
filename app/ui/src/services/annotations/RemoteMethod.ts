@@ -20,6 +20,10 @@ const remoteMethod = (instance: IService, methodName: string, props?: RemoteMeth
 
     return async function (this: IRemoteServiceWrapper, ...args: any): Promise<any> {
 
+        if (process.env.REACT_APP_API_DEVMODE === '1') {
+            return;
+        }
+
         const context = this.getRemoteServiceContext();
 
         const appService = ServiceContainer.resolve<AppService>(AppService);
@@ -27,8 +31,6 @@ const remoteMethod = (instance: IService, methodName: string, props?: RemoteMeth
         const apiBaseUrl = appService.getApiBaseUrl();
 
         const url = `${apiBaseUrl}/${context.getUrlPattern()}/${endpointName}`;
-
-        console.log(url);
 
         const response = await fetch(url, {
             method: method.toString(),
