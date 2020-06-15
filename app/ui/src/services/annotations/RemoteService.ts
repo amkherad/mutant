@@ -10,7 +10,7 @@ export interface RemoteServiceProps {
 }
 
 
-export const RemoteService = (props: RemoteServiceProps): ClassDecorator => {
+export function RemoteService (props: RemoteServiceProps): ClassDecorator {
 
     const context = new RemoteServiceContext(props.interfaceName);
 

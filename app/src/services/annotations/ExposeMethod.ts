@@ -12,7 +12,7 @@ export interface ExposeMethodProps {
 }
 
 
-export const ExposeMethod = (props?: ExposeMethodProps): MethodDecorator => {
+export function ExposeMethod (props?: ExposeMethodProps): MethodDecorator {
 
     const method = props?.method || 'POST';
 

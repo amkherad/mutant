@@ -13,7 +13,7 @@ interface RemoteMethodProps {
 }
 
 
-const remoteMethod = (instance: IService, methodName: string, props?: RemoteMethodProps) : () => Promise<any> => {
+function remoteMethod (instance: IService, methodName: string, props?: RemoteMethodProps) : () => Promise<any> {
 
     const method = props?.method || 'POST';
     const endpointName = props?.endpointName || methodName;
@@ -61,7 +61,7 @@ const remoteMethod = (instance: IService, methodName: string, props?: RemoteMeth
 }
 
 
-export const RemoteMethod = (props?: RemoteMethodProps): MethodDecorator => {
+export function RemoteMethod (props?: RemoteMethodProps): MethodDecorator {
 
     return (target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
 

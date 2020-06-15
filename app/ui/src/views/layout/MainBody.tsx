@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { PipelineWidget } from "../components/PipelineWidget";
 
 
 interface MainBodyProps {
@@ -18,7 +17,7 @@ export class MainBody extends Component<MainBodyProps> {
     render() {
         return (
             <div>
-                <PipelineWidget/>
+                {this.props.children}
             </div>
         );
     }

@@ -5,41 +5,135 @@ import { IButtonProps } from 'office-ui-fabric-react/lib/Button';
 const _items: ICommandBarItemProps[] = [
     {
         key: 'newItem',
-        text: 'New',
+        text: 'Pipeline',
         cacheKey: 'myCacheKey', // changing this key will invalidate this item's cache
         iconProps: { iconName: 'Add' },
         subMenuProps: {
             items: [
                 {
                     key: 'emailMessage',
-                    text: 'Email message',
-                    iconProps: { iconName: 'Mail' },
+                    text: 'Create From Template',
+                    iconProps: { iconName: 'Add' },
                     ['data-automation-id']: 'newEmailButton', // optional
                 },
                 {
                     key: 'calendarEvent',
-                    text: 'Calendar event',
+                    text: 'Create Empty Pipeline',
                     iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'calendarEvent',
+                    text: 'Save Pipeline',
+                    iconProps: { iconName: 'Add' },
                 },
             ],
         },
     },
     {
-        key: 'upload',
-        text: 'Upload',
-        iconProps: { iconName: 'Upload' },
+        key: 'library',
+        text: 'Library',
+        iconProps: { iconName: 'Library' },
+        subMenuProps: {
+            items: [
+                {
+                    key: 'library-all',
+                    text: 'Library',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'library-local',
+                    text: 'Local Library',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'library-online',
+                    text: 'Online Library',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'library-community',
+                    text: 'Community',
+                    iconProps: { iconName: 'Mail' },
+                    ['data-automation-id']: 'newEmailButton', // optional
+                },
+            ],
+        },
     },
     {
         key: 'share',
-        text: 'Share',
+        text: 'Export',
         iconProps: { iconName: 'Share' },
         onClick: () => console.log('Share'),
+        subMenuProps: {
+            items: [
+                {
+                    key: 'export-all',
+                    text: 'To JavaScript...',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'export-all',
+                    text: 'To Python...',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'export-local',
+                    text: 'To Bash...',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'export-online',
+                    text: 'To Windows Batch File...',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'export-community',
+                    text: 'To Haxe...',
+                    iconProps: { iconName: 'Mail' },
+                    ['data-automation-id']: 'newEmailButton', // optional
+                },
+            ],
+        },
     },
     {
-        key: 'download',
-        text: 'Download',
+        key: 'execute',
+        text: 'Execute',
         iconProps: { iconName: 'Download' },
         onClick: () => console.log('Download'),
+        subMenuProps: {
+            items: [
+                {
+                    key: 'execute-debug',
+                    text: 'Debug...',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'execute-run',
+                    text: 'Run Pipeline',
+                    iconProps: { iconName: 'Calendar' },
+                },
+                {
+                    key: 'export-run-sandbox',
+                    text: 'Run Sandboxed',
+                    iconProps: { iconName: 'Calendar' },
+                    // subMenuProps: {
+                    //     items: [
+                    //         {
+                    //             key: 'export-online',
+                    //             text: 'To Windows Batch File...',
+                    //             iconProps: { iconName: 'Calendar' },
+                    //         },
+                    //         {
+                    //             key: 'export-community',
+                    //             text: 'To Haxe...',
+                    //             iconProps: { iconName: 'Mail' },
+                    //             ['data-automation-id']: 'newEmailButton', // optional
+                    //         },
+                    //     ]
+                    // }
+                },
+            ],
+        },
     },
 ];
 
@@ -61,12 +155,25 @@ const _farItems: ICommandBarItemProps[] = [
     },
     {
         key: 'info',
-        text: 'Info',
-        // This needs an ariaLabel since it's icon-only
-        ariaLabel: 'Info',
-        iconOnly: true,
-        iconProps: { iconName: 'Info' },
+        text: 'Options',
+        iconProps: { iconName: 'GlobalNavButton' },
         onClick: () => console.log('Info'),
+        subMenuProps: {
+            items: [
+                {
+                    key: 'settings',
+                    text: 'Sign In',
+                    iconProps: { iconName: 'SignIn' },
+                    onClick: () => console.log('Tiles'),
+                },
+                {
+                    key: 'settings',
+                    text: 'Settings',
+                    iconProps: { iconName: 'Settings' },
+                    onClick: () => console.log('Tiles'),
+                },
+            ]
+        }
     },
 ];
 
@@ -81,12 +188,19 @@ export class MainHeader extends Component {
             <div>
                 <CommandBar
                     items={_items}
-                    overflowItems={_overflowItems}
-                    overflowButtonProps={overflowProps}
+                    // overflowItems={_overflowItems}
+                    // overflowButtonProps={overflowProps}
                     farItems={_farItems}
-                    
+
                     ariaLabel="Use left and right arrow keys to navigate between commands"
                 />
+
+                <div style={{
+                    height: '1px',
+                    backgroundColor: '#000',
+                }}>
+
+                </div>
             </div>
         );
     }

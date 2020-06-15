@@ -11,7 +11,7 @@ export interface ExposeServiceProps {
 }
 
 
-export const ExposeService = (props: ExposeServiceProps): ClassDecorator => {
+export function ExposeService (props: ExposeServiceProps): ClassDecorator {
 
     const endpointName = props.serviceName || props.interfaceName;
     const context = new ExposedServiceContext(endpointName);
