@@ -1,3 +1,8 @@
 {
-    "name": "interface"
+    "name": "@mutant/interface",
+    "version": "0.0.1",
+    "description": "",
+    "keywords": [],
+    "author": "Ali Mousavi Kherad <alimousavikherad@gmail.com> (http://amkherad.ir)",
+    "license": "MIT"
 }

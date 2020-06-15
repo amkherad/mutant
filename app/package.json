@@ -16,8 +16,10 @@
   },
   "keywords": [],
   "author": "Ali Mousavi Kherad <alimousavikherad@gmail.com> (http://amkherad.ir)",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "@mutant/interface": "file:../lib/interface",
+    "@mutant/core": "file:../lib/core",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",

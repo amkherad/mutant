@@ -1,6 +1,6 @@
 import { IRemoteServiceWrapper } from "./IRemoteServiceWrapper";
-import { IService } from "lib/interface/services/IService";
-import { HttpMethods } from "lib/interface/HttpMethods";
+import { IService } from "@mutant/interface/services/IService";
+import { HttpMethods } from "@mutant/interface/HttpMethods";
 import { ServiceContainer } from "../ServiceContainer";
 import { AppService } from "../AppService";
 

@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ServiceContainer } from './services/ServiceContainer';
-import { IModuleService } from 'lib/interface/services/IModuleService';
+import { IModuleService } from '@mutant/interface/services/IModuleService';
 import * as qs from 'qs';
 
 const queryParameters = qs.parse(window.location.search);

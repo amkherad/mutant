@@ -1,4 +1,4 @@
-import { IModuleService } from "lib/interface/services/IModuleService";
+import { IModuleService } from "@mutant/interface/services/IModuleService";
 import { RemoteService } from "./annotations/RemoteService";
 import { RemoteMethod } from "./annotations/RemoteMethod";
 

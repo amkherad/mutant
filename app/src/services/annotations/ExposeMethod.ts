@@ -1,6 +1,6 @@
 import { ServiceCollection } from "../interface/ServiceCollection"
 import { IExposedServiceWrapper } from "./IExposedServiceWrapper";
-import { HttpMethods } from "lib/interface/HttpMethods";
+import { HttpMethods } from "@mutant/interface/HttpMethods";
 
 
 export interface ExposeMethodProps {

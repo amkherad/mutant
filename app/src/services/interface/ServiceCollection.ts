@@ -1,9 +1,9 @@
 import { IExposedServiceWrapper } from "../annotations/IExposedServiceWrapper";
-import { HttpMethods } from 'lib/interface/HttpMethods';
+import { HttpMethods } from '@mutant/interface/HttpMethods';
 import { HttpInterface } from "./HttpInterface";
 import { ServiceContainer } from "../ServiceContainer";
 import * as express from 'express';
-import { IService } from "lib/interface/services/IService";
+import { IService } from "@mutant/interface/services/IService";
 
 
 interface EndpointDescriptor {

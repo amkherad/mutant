@@ -1,5 +1,5 @@
 import express, { IRouterMatcher } from 'express';
-import { HttpMethods } from 'lib/interface/HttpMethods';
+import { HttpMethods } from '@mutant/interface/HttpMethods';
 
 export class HttpInterface {
 
