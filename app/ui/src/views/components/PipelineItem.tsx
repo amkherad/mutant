@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from "react";
+import {PipelineItemDto} from '@mutant/interface/pipeline/PipelineItemDto';
 
 
 interface PipelineItemProps {
 
-    displayName: string;
+    item: PipelineItemDto;
 
 }
 
@@ -12,7 +13,7 @@ export const PipelineItem : FunctionComponent<PipelineItemProps> = (props: Pipel
 
     return (
         <div>
-            {props.displayName}
+            {props.item.moduleName}
         </div>
     );
 

@@ -1,5 +1,2 @@
 
-export enum AppLanguage {
-    English = 'english',
-    Farsi = 'farsi'
-}
+export type AppLanguage = 'english' | 'farsi';

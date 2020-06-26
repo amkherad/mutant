@@ -4,6 +4,7 @@ import { HttpInterface } from "./HttpInterface";
 import { ServiceContainer } from "../ServiceContainer";
 import * as express from 'express';
 import { IService } from "@mutant/interface/services/IService";
+import {BaseResponseDto} from "@mutant/interface/models/BaseResponseDto";
 
 
 interface EndpointDescriptor {
@@ -16,7 +17,7 @@ interface EndpointDescriptor {
 
 interface ServiceDescriptor {
 
-    ctor?: new(...args: any) => {};
+    ctor?: new (...args: any) => {};
 
     endpointName: string;
 
@@ -24,6 +25,14 @@ interface ServiceDescriptor {
 
 }
 
+
+function isEmpty(obj: any) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
 
 export class ServiceCollection {
 
@@ -47,40 +56,64 @@ export class ServiceCollection {
     }
 
     static async handleRequest(req: express.Request, res: express.Response): Promise<any> {
-        console.log(`Service endpoint was called: ${req.method} ${req.url}`);
+        try {
+            console.log(`Service endpoint was called: ${req.method} ${req.url}`);
 
-        const urlParts = req.url.split('/');
-        const serviceName = urlParts[2];
-        const methodName = urlParts[3];
+            const urlParts = req.url.split('/');
+            const serviceName = urlParts[2];
+            const methodName = urlParts[3];
 
-        console.log(`   ---- Request to ${serviceName}.${methodName}()`);
+            console.log(`   ---- Request to ${serviceName}.${methodName}()`);
 
-        let service: ServiceDescriptor | undefined = undefined;
+            let service: ServiceDescriptor | undefined = undefined;
 
-        for (const serviceKey in ServiceCollection.services) {
-            if (ServiceCollection.services.hasOwnProperty(serviceKey)) {
-                const element = ServiceCollection.services[serviceKey];
-                
-                service = element;
+            for (const serviceKey in ServiceCollection.services) {
+                if (ServiceCollection.services.hasOwnProperty(serviceKey)) {
+                    const element = ServiceCollection.services[serviceKey];
+
+                    if (element.endpointName == serviceName) {
+                        service = element;
+                    }
+                }
             }
+
+            if (typeof service === 'undefined') {
+                throw new Error(`Requested service could not be found, serviceName: ${serviceName}, methodName: ${methodName}`);
+            }
+
+            if (typeof service.ctor === 'undefined') {
+                throw new Error('Invalid state, ctor is undefined.');
+            }
+
+            const body = req.body;
+
+            const instance = ServiceContainer.resolve<IService>(service.ctor);
+
+            const method = instance[methodName];
+
+            let response: any;
+            if (typeof body === 'undefined' || isEmpty(body)) {
+                response = await method();
+            } else {
+                response = await method(...body);
+            }
+
+            res.setHeader('Content-Type', 'application/json');
+            res.send({
+                status: 'success',
+                result: response
+            } as BaseResponseDto<any>);
+
+        } catch (err) {
+
+            res.setHeader('Content-Type', 'application/json');
+            res.send({
+                status: 'error',
+                message: err?.toString()
+            } as BaseResponseDto<any>);
+            
         }
 
-        if (typeof service === 'undefined') {
-            throw new Error(`Requested service could not be found, serviceName: ${serviceName}, methodName: ${methodName}`);
-        }
-
-        if (typeof service.ctor === 'undefined') {
-            throw new Error('Invalid state, ctor is undefined.');
-        }
-
-        const instance = ServiceContainer.resolve<IService>(service.ctor);
-
-        const method = instance[methodName];
-
-        const response = await method();
-
-        res.setHeader('Content-Type', 'application/json');
-        res.send(response);
     }
 
     static addEndpoints(httpInterface: HttpInterface) {

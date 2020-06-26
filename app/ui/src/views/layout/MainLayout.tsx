@@ -5,7 +5,7 @@ import { MainBody } from './MainBody';
 import { EnvironmentServiceContext } from 'src/services/context/EnvironmentServiceContext';
 import { LanguageModel } from '@mutant/interface/models/LanguageModel';
 import { NavigationServiceContext, NavigationServiceProvider } from 'src/services/context/NavigationServiceContext';
-import { NavigationService } from 'src/services/NavigationService';
+import { INavigationService } from 'src/services/INavigationService';
 import { HomePage } from '../home/HomePage';
 
 
@@ -24,7 +24,7 @@ interface MainLayoutState {
 
 }
 
-class NavService implements NavigationService {
+class NavService implements INavigationService {
     constructor() {
 
     }

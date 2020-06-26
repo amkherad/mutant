@@ -11,18 +11,18 @@ const _items: ICommandBarItemProps[] = [
         subMenuProps: {
             items: [
                 {
-                    key: 'emailMessage',
+                    key: 'newItem-add',
                     text: 'Create From Template',
                     iconProps: { iconName: 'Add' },
                     ['data-automation-id']: 'newEmailButton', // optional
                 },
                 {
-                    key: 'calendarEvent',
+                    key: 'newItem-pipeline', 
                     text: 'Create Empty Pipeline',
                     iconProps: { iconName: 'Calendar' },
                 },
                 {
-                    key: 'calendarEvent',
+                    key: 'newItem-save',
                     text: 'Save Pipeline',
                     iconProps: { iconName: 'Add' },
                 },
@@ -59,42 +59,42 @@ const _items: ICommandBarItemProps[] = [
             ],
         },
     },
-    {
-        key: 'share',
-        text: 'Export',
-        iconProps: { iconName: 'Share' },
-        onClick: () => console.log('Share'),
-        subMenuProps: {
-            items: [
-                {
-                    key: 'export-all',
-                    text: 'To JavaScript...',
-                    iconProps: { iconName: 'Calendar' },
-                },
-                {
-                    key: 'export-all',
-                    text: 'To Python...',
-                    iconProps: { iconName: 'Calendar' },
-                },
-                {
-                    key: 'export-local',
-                    text: 'To Bash...',
-                    iconProps: { iconName: 'Calendar' },
-                },
-                {
-                    key: 'export-online',
-                    text: 'To Windows Batch File...',
-                    iconProps: { iconName: 'Calendar' },
-                },
-                {
-                    key: 'export-community',
-                    text: 'To Haxe...',
-                    iconProps: { iconName: 'Mail' },
-                    ['data-automation-id']: 'newEmailButton', // optional
-                },
-            ],
-        },
-    },
+    // {
+    //     key: 'share',
+    //     text: 'Export',
+    //     iconProps: { iconName: 'Share' },
+    //     onClick: () => console.log('Share'),
+    //     subMenuProps: {
+    //         items: [
+    //             {
+    //                 key: 'share-all',
+    //                 text: 'To JavaScript...',
+    //                 iconProps: { iconName: 'Calendar' },
+    //             },
+    //             {
+    //                 key: 'share-all',
+    //                 text: 'To Python...',
+    //                 iconProps: { iconName: 'Calendar' },
+    //             },
+    //             {
+    //                 key: 'share-local',
+    //                 text: 'To Bash...',
+    //                 iconProps: { iconName: 'Calendar' },
+    //             },
+    //             {
+    //                 key: 'export-online',
+    //                 text: 'To Windows Batch File...',
+    //                 iconProps: { iconName: 'Calendar' },
+    //             },
+    //             {
+    //                 key: 'export-community',
+    //                 text: 'To Haxe...',
+    //                 iconProps: { iconName: 'Mail' },
+    //                 ['data-automation-id']: 'newEmailButton', // optional
+    //             },
+    //         ],
+    //     },
+    // },
     {
         key: 'execute',
         text: 'Execute',
@@ -154,20 +154,20 @@ const _farItems: ICommandBarItemProps[] = [
         onClick: () => console.log('Tiles'),
     },
     {
-        key: 'info',
+        key: 'options',
         text: 'Options',
         iconProps: { iconName: 'GlobalNavButton' },
         onClick: () => console.log('Info'),
         subMenuProps: {
             items: [
                 {
-                    key: 'settings',
+                    key: 'options-sign-in',
                     text: 'Sign In',
                     iconProps: { iconName: 'SignIn' },
                     onClick: () => console.log('Tiles'),
                 },
                 {
-                    key: 'settings',
+                    key: 'options-settings',
                     text: 'Settings',
                     iconProps: { iconName: 'Settings' },
                     onClick: () => console.log('Tiles'),
@@ -191,6 +191,7 @@ export class MainHeader extends Component {
                     // overflowItems={_overflowItems}
                     // overflowButtonProps={overflowProps}
                     farItems={_farItems}
+                    
 
                     ariaLabel="Use left and right arrow keys to navigate between commands"
                 />

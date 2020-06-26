@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { PipelineModel } from "src/models/PipelineModel";
 import { PipelineItem } from "./PipelineItem";
+import { PipelineDto } from "@mutant/interface/pipeline/PipelineDto";
+import { Button, IconButton, Icon } from "@fluentui/react";
+import { ModulePickerButton } from "./ModulePickerButton";
 
 
 interface PipelineWidgetProps {
@@ -11,7 +13,7 @@ interface PipelineWidgetProps {
 
 interface PipelineWidgetState {
 
-    pipeline: PipelineModel;
+    pipeline: PipelineDto;
 
 }
 
@@ -51,10 +53,19 @@ export class PipelineWidget extends Component<PipelineWidgetProps, PipelineWidge
                 {
                     this.state.pipeline.items.map((item, index) => (
                         <PipelineItem
-                            displayName={item.name}
+                            item={item}
                         />
                     ))
                 }
+
+                <div>
+                    {/* <Button>
+                        <Icon iconName='Add' />
+                        Add
+                    </Button> */}
+                    <ModulePickerButton />
+                </div>
+
             </div>
         );
     }

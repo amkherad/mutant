@@ -40,6 +40,8 @@ const appIsReady = async () => {
     parseInt(process.env.APP_PORT || '0')
   );
 
+  httpInterface.allowAllCors();
+
   uiResourceDriver = new UIResourceDriver(uiDirName);
   uiResourceDriver.configure(httpInterface);
 

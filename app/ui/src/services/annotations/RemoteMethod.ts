@@ -3,6 +3,8 @@ import { IService } from "@mutant/interface/services/IService";
 import { HttpMethods } from "@mutant/interface/HttpMethods";
 import { ServiceContainer } from "../ServiceContainer";
 import { AppService } from "../AppService";
+import {BaseResponseDto} from "@mutant/interface/models/BaseResponseDto";
+
 
 interface RemoteMethodProps {
 
@@ -13,7 +15,7 @@ interface RemoteMethodProps {
 }
 
 
-function remoteMethod (instance: IService, methodName: string, props?: RemoteMethodProps) : () => Promise<any> {
+function remoteMethod (instance: IService, methodName: string, props?: RemoteMethodProps) : (...args: any) => Promise<any> {
 
     const method = props?.method || 'POST';
     const endpointName = props?.endpointName || methodName;
@@ -32,7 +34,16 @@ function remoteMethod (instance: IService, methodName: string, props?: RemoteMet
 
         const url = `${apiBaseUrl}/${context.getUrlPattern()}/${endpointName}`;
 
+        const headers: Record<string, string> = {};
+
+        const body = typeof args !== 'undefined' && args.length > 0 ? JSON.stringify(args) : undefined;
+        if (typeof body !== 'undefined') {
+            headers['Content-Type'] = 'application/json';
+        }
+
         const response = await fetch(url, {
+            body: body,
+            headers: headers,
             method: method.toString(),
         });
 
@@ -46,7 +57,7 @@ function remoteMethod (instance: IService, methodName: string, props?: RemoteMet
             return {};
         }
 
-        let json : any;
+        let json : BaseResponseDto<any>;
 
         try {
             json = JSON.parse(responseText);
@@ -56,7 +67,11 @@ function remoteMethod (instance: IService, methodName: string, props?: RemoteMet
             throw new Error(`Error in '${methodName}()', status: ${response.status}, statusText: ${response.statusText}, url: ${url}`);
         }
 
-        return json;
+        if (json.status !== 'success') {
+            throw new Error(`Error in '${methodName}()', message: ${json.message}, url: ${url}`);
+        }
+
+        return json.result;
     };
 }
 

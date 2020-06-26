@@ -1,5 +1,8 @@
 import express, { IRouterMatcher } from 'express';
+import cors from 'cors';
 import { HttpMethods } from '@mutant/interface/HttpMethods';
+import bodyParser from 'body-parser';
+
 
 export class HttpInterface {
 
@@ -9,37 +12,45 @@ export class HttpInterface {
     constructor(port?: number) {
         this.port = port || 0;
         this.exp = express();
+
+        this.exp.use(bodyParser.json({
+            type: 'application/json'
+        }));
+    }
+
+    allowAllCors() {
+        this.exp.use(cors());
     }
 
     getExpress(): express.Application {
         return this.exp;
     }
 
-    registerHandlerByMethod(method: HttpMethods, directory: string, handler: any) {
+    registerHandlerByMethod(method: HttpMethods, path: string, handler: any) {
         switch (method) {
             case 'GET': {
-                this.exp.get(directory, handler);
+                this.exp.get(path, handler);
                 break;
             }
             case 'PATCH': {
-                this.exp.patch(directory, handler);
+                this.exp.patch(path, handler);
                 break;
             }
             case 'PUT': {
-                this.exp.put(directory, handler);
+                this.exp.put(path, handler);
                 break;
             }
             case 'DELETE': {
-                this.exp.delete(directory, handler);
+                this.exp.delete(path, handler);
                 break;
             }
             case 'OPTIONS': {
-                this.exp.options(directory, handler);
+                this.exp.options(path, handler);
                 break;
             }
             case 'POST':
             default: {
-                this.exp.post(directory, handler);
+                this.exp.post(path, handler);
                 break;
             }
         }
@@ -47,10 +58,10 @@ export class HttpInterface {
 
     addEndpoint(
         handler: (req: express.Request, res: express.Response) => void | Promise<any>,
-        directory: string,
+        path: string,
         method: HttpMethods = 'POST') {
 
-        this.registerHandlerByMethod(method, directory, handler as any);
+        this.registerHandlerByMethod(method, path, handler as any);
 
     }
 

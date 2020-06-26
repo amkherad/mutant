@@ -1,18 +1,17 @@
-import { IEnvironmentService } from "@mutant/interface/services/IEnvironmentService";
-import { RemoteService } from "./annotations/RemoteService";
-import { RemoteMethod } from "./annotations/RemoteMethod";
+import { IEnvironmentService } from "interface/services/IEnvironmentService";
+import { ExposeService } from "./annotations/ExposeService";
+import { ExposeMethod } from "./annotations/ExposeMethod";
 import { LanguageModel } from "@mutant/interface/models/LanguageModel";
 import { ThemeModel } from "@mutant/interface/models/ThemeModel";
 
-
-@RemoteService({
+@ExposeService({
     interfaceName: 'IEnvironmentService',
-    remoteName: 'environment'
 })
-export class EnvironmentServiceRPC implements IEnvironmentService {
+export class EnvironmentService implements IEnvironmentService {
+
     [x: string]: (...args: any) => Promise<any>;
     
-    @RemoteMethod()
+    @ExposeMethod()
     async getLanguage(): Promise<LanguageModel> {
         return {
             getDirection: () => {
@@ -24,7 +23,7 @@ export class EnvironmentServiceRPC implements IEnvironmentService {
         };
     }
 
-    @RemoteMethod()
+    @ExposeMethod()
     async getTheme(): Promise<ThemeModel> {
         return {
 

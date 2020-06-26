@@ -1,6 +1,7 @@
-import { IModuleService } from "@mutant/interface/services/IModuleService";
+import { IModuleService, GetModulesQueryFilter } from "@mutant/interface/services/IModuleService";
 import { RemoteService } from "./annotations/RemoteService";
 import { RemoteMethod } from "./annotations/RemoteMethod";
+import { ModuleCollectionInfo } from "@mutant/interface/modules/ModuleCollectionInfo";
 
 
 @RemoteService({
@@ -12,7 +13,7 @@ export class ModuleServiceRPC implements IModuleService {
     [x: string]: (...args: any) => Promise<any>;
     
     @RemoteMethod()
-    getModules(): Promise<string[]> {
+    getModules(filter: GetModulesQueryFilter): Promise<ModuleCollectionInfo[]> {
         throw new Error('Not supoprted.');
     }
 

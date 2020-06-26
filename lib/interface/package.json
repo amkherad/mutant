@@ -4,5 +4,8 @@
     "description": "",
     "keywords": [],
     "author": "Ali Mousavi Kherad <alimousavikherad@gmail.com> (http://amkherad.ir)",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "rxjs": "^6.5.5"
+    }
 }
